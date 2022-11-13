@@ -40,8 +40,12 @@ func handleConnection(conn net.Conn) {
 			return
 		}
 		fmt.Println("Received", string(buf[:n]))
-		if string(buf[:n]) == "ping" {
-			conn.Write([]byte("PONG"))
-		}
+		// check for the "PING" command in resp protocol
+		//if string(buf[:n]) == "*1\r
+		//if string(buf[:n]) == "PING" {
+		//	fmt.Println("Sending PONG")
+		// Send PONG in resp protocol
+		conn.Write([]byte("+PONG\r\n"))
+		//}
 	}
 }
