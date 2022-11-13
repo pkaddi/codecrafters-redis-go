@@ -32,14 +32,16 @@ func main() {
 
 func handleConnection(conn net.Conn) {
 	defer conn.Close()
-	buf := make([]byte, 1024)
-	n, err := conn.Read(buf)
-	if err != nil {
-		fmt.Println("Failed to read from connection", err.Error())
-		return
-	}
-	fmt.Println("Received", string(buf[:n]))
-	if string(buf[:n]) == "PING" {
-		conn.Write([]byte("PONG"))
+	for {
+		buf := make([]byte, 1024)
+		n, err := conn.Read(buf)
+		if err != nil {
+			fmt.Println("Failed to read from connection", err.Error())
+			return
+		}
+		fmt.Println("Received", string(buf[:n]))
+		if string(buf[:n]) == "PING" {
+			conn.Write([]byte("PONG"))
+		}
 	}
 }
