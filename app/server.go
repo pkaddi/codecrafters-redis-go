@@ -40,7 +40,7 @@ func handleConnection(conn net.Conn) {
 			return
 		}
 		fmt.Println("Received", string(buf[:n]))
-		if string(buf[:n]) == "PING" {
+		if string(buf[:n]) == "ping" {
 			conn.Write([]byte("PONG"))
 		}
 	}
