@@ -45,6 +45,7 @@ func handleConnection(conn net.Conn) {
 		//if string(buf[:n]) == "PING" {
 		//	fmt.Println("Sending PONG")
 		// Send PONG in resp protocol
+		// multiple pings work
 		conn.Write([]byte("+PONG\r\n"))
 		//}
 	}
